@@ -19,6 +19,20 @@ class StudentRepository extends ServiceEntityRepository
         parent::__construct($registry, Student::class);
     }
 
+    /**
+     * Retourne une liste d'étudiant pour l'api
+     *
+     * @return array
+     */
+    public function apiFindByDepartment(): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->andWhere('s.department IS NOT NULL');
+
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
     // /**
     //  * @return Student[] Returns an array of Student objects
     //  */

@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Department;
 use App\Entity\Student;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +17,11 @@ class StudentType extends AbstractType
             ->add('FisrtName')
             ->add('LastName')
             ->add('NumEtud')
-        ;
+            ->add('Department', EntityType::class, [
+                'class' => Department::class,
+                'choice_label' => 'name',
+                'required' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
